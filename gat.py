@@ -5,6 +5,7 @@ from torch_geometric.data import Data, DataLoader
 import pandas as pd
 from rdkit import Chem
 from sklearn.model_selection import train_test_split
+import math
 
 # -------------------------------
 # Step 1. Convert SMILES to Graph
@@ -50,13 +51,18 @@ def smiles_to_data(smiles, label):
 # Step 2. Load Dataset and Convert to Graphs
 # -----------------------------------------
 # Assume your CSV has columns: 'smiles' and 'label'
-df = pd.read_csv("smiles_dataset.csv")
+# df = pd.read_csv("smiles_dataset.csv")
+df = pd.read_csv("result_with_ATG_AP_1_CIS_up.csv")
 
 data_list = []
 for idx, row in df.iterrows():
-    data_obj = smiles_to_data(row['smiles'], row['label'])
-    if data_obj is not None:
-        data_list.append(data_obj)
+    try:
+        print(row['smiles'], row['label'])
+        data_obj = smiles_to_data(row['smiles'], row['label'])
+        if data_obj is not None:
+            data_list.append(data_obj)
+    except  Exception as e:
+        print(f"Ignore error")
 
 # (Optional) Split into train and test sets
 train_data, test_data = train_test_split(data_list, test_size=0.2, random_state=42)
