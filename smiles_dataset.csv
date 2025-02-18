@@ -1,0 +1,6 @@
+smiles,label
+CCO,0
+c1ccccc1,1
+CC(=O)O,0
+C1=CC=CN=C1,1
+C1CC1,0
