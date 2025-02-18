@@ -57,10 +57,10 @@ df = pd.read_csv("result_with_ATG_AP_1_CIS_up.csv")
 data_list = []
 for idx, row in df.iterrows():
     try:
-        print(row['smiles'], row['label'])
         data_obj = smiles_to_data(row['smiles'], row['label'])
         if data_obj is not None:
             data_list.append(data_obj)
+        print(row['smiles'], row['label'])
     except  Exception as e:
         print(f"Ignore error")
 
