@@ -33,16 +33,15 @@ def standardize_smiles(smiles: str) -> str:
     std_smiles = dm.to_smiles(std_mol)
     return std_smiles
 def fix_csv() :
-    new_rows = []
     fieldnames=[]
     # open file to read
     with open('toxcast_data.csv', newline='') as csvfile:
       reader = csv.DictReader(csvfile)
       # get field names
       fieldnames = reader.fieldnames
-      # loop thru the
+      new_rows = []
       for row in reader:
-        s=row['smiles'];
+        s=row['smiles']
         # standardize
         std= standardize_smiles(s)
         print(f"Original: {s}\nStandardized: {std}\n")
@@ -50,12 +49,21 @@ def fix_csv() :
         row['smiles']= std
         # add the row
         new_rows.append(row)
-    # write the result to file
-    with open('result.csv', mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames)
-        writer.writeheader()
-        writer.writerows(new_rows)
-# Example usage:
+      for f in fieldnames:
+        if f !="smiles":
+          new_row1s = []
+          for row in new_rows:
+            nrow = {}
+            # update the value
+            if row['smiles'] and row[f]:
+              nrow['smiles']= row['smiles']
+              nrow['label']= row[f]
+            # add the row
+              new_row1s.append(nrow)
+          with open(f'files/result_{f}.csv', mode='w', newline='') as file1:
+              writer = csv.DictWriter(file1, ["smiles", "label"])
+              writer.writeheader()
+              writer.writerows(new_row1s)
 
 if __name__ == "__main__":
     # Example list of SMILES (including one with a salt)
