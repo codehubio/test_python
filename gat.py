@@ -88,11 +88,13 @@ def calculate_auc(loader, model, device):
     all_probs = np.concatenate(all_probs)
     
     # If binary classification, use probability of class 1.
-    if all_probs.shape[1] == 2:
-        auc = roc_auc_score(all_targets, all_probs[:, 1])
-    else:
-        # For multiclass, use one-vs-rest approach.
-        auc = roc_auc_score(all_targets, all_probs, multi_class='ovr')
+    # if all_probs.shape[1] == 2:
+    #     auc = roc_auc_score(all_targets, all_probs[:, 1])
+    # else:
+    #     # For multiclass, use one-vs-rest approach.
+    #     auc = roc_auc_score(all_targets, all_probs, multi_class='ovr')
+    auc = roc_auc_score(all_targets, np.argmax(all_probs, axis=1), multi_class="ovr")
+
         
     return auc
 
