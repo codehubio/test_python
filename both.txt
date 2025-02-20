@@ -1,0 +1,17 @@
+APR_HepG2_StressKinase_1h_up
+APR_Hepat_Steatosis_48hr_up
+ATG_CRE_CIS_dn
+ATG_ERRg_TRANS_up
+ATG_GATA_CIS_dn
+ATG_NRF1_CIS_up
+ATG_RARg_TRANS_up
+ATG_Sox_CIS_dn
+ATG_Sp1_CIS_dn
+ATG_VDR_TRANS_dn
+BSK_3C_Thrombomodulin_down
+BSK_CASM3C_Thrombomodulin_down
+BSK_hDFCGF_EGFR_up
+NVS_NR_hRAR_Antagonist
+NVS_NR_hRARa_Agonist
+OT_NURR1_NURR1RXRa_1440
+TOX21_MMP_ratio_up
